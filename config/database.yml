@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: pai
+  password: tigers
+  host: db
+
+development:
+  <<: *default
+  database: pai_review_dev
+
+test:
+  <<: *default
+  database: pai_review_test
+
+production:
+  <<: *default
+  database: pai_review_production
+  username: pai_review
+  password: <%= ENV['PAI_REVIEW_DATABASE_PASSWORD'] %>
