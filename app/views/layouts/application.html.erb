@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PaiReview</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>PaiReview</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+
+<body>
+  <%= render 'layouts/partial/header' %>
+
+  <% if flash[:notice] %>
+  <p class="notice bg-green-300 text-center text-white p-2"><%= notice %></p>
+  <% end %>
+
+  <% if flash[:alert] %>
+  <p class="alert bg-red-300 text-center text-white p-2"><%= alert %></p>
+  <% end %>
+
+  <%= yield %>
+
+  <%= render 'layouts/partial/footer' %>
+</body>
+
 </html>

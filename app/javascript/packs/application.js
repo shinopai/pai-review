@@ -11,3 +11,18 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// tailwindcss
+import '../css/tailwind.css'
+
+// jquery
+require('jquery')
+
+// top page slide show
+require('../slick')
+
+// // fontawesome
+// import '@fortawesome/fontawesome-free/js/all';
+
+// header
+require('../modules/header')

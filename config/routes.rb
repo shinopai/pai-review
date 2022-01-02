@@ -1,3 +1,22 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # devise
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
+
+  # redirects
+  get '/users' => redirect('/users/sign_up')
+
+  # root
+  root 'home#index'
+
+  # about page
+  get '/about', to: 'home#about'
+
+  # contact page
+  get '/contact', to: 'home#contact'
+
+  # search page
+  get '/search', to: 'home#search'
 end
