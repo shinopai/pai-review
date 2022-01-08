@@ -1,0 +1,32 @@
+<div class="w-5/6 mx-auto">
+  <div class="text-center my-5">
+    <h1 class="font-bold text-xl">お気に入り一覧</h1>
+  </div>
+  <table class="mt-10 mx-auto">
+    <tbody class="bg-gray-200">
+      <% @liked_items.each do |item| %>
+      <tr class="bg-white border-2 border-gray-200">
+        <td class="px-3 py-2 flex flex-row items-center">
+          <%= link_to image_tag(show_url(item.image_path), class: 'h-30 w-20 object-cover', alt: item.title), item.url %>
+        </td>
+        <td>
+          <span class="text-center ml-2 font-semibold"><%= item.title %></span>
+        </td>
+        <td class="px-5 py-2">
+          <span>Category</span>
+        </td>
+        <td class="px-5 py-2">
+          <span><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          </span>
+        </td>
+
+        <td class="px-5 py-2">
+          <%= link_to item_path(item.id) do %>
+          <button class="mt-2 border border-blue-400 p-1 rounded-lg text-blue-400 hover:bg-blue-400 hover:text-white">詳細</button>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

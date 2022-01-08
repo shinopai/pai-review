@@ -1,0 +1,49 @@
+<div class="w-5/6 mx-auto">
+  <div class="text-center my-5">
+    <i class="fas fa-search-plus text-3xl search-form-trigger cursor-pointer hover:bg-gray-200 rounded-full p-2"></i>
+  </div>
+  <div class="container flex justify-center items-center search-form hidden">
+    <div class="relative">
+      <%= search_form_for @q, url: search_items_path do |search| %>
+      <div class="absolute top-4 left-3"> <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div>
+      <%= search.text_field :title_or_description_cont, class: 'h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none', placeholder: 'アイテム名か商品説明で検索' %>
+      <div class="absolute top-2 right-2"><%= search.submit 'Search', class: 'h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600 cursor-pointer' %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="my-10 mx-auto">
+    <thead>
+      <tr>
+        <th class="py-2 text-left">検索条件:&nbsp;「<%= @search_word %>」&nbsp;<%= @items.size %>件</th>
+      </tr>
+    </thead>
+    <tbody class="bg-gray-200">
+      <% @items.each do |item| %>
+      <tr class="bg-white border-2 border-gray-200">
+        <td class="px-3 py-2 flex flex-row items-center">
+          <%= link_to image_tag(show_url(item.image_path), class: 'h-30 w-20 object-cover', alt: item.title), item.url %>
+        </td>
+        <td>
+          <span class="text-center ml-2 font-semibold"><%= item.title %></span>
+        </td>
+        <td class="px-5 py-2">
+          <span>Category</span>
+        </td>
+        <td class="px-5 py-2">
+          <span><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          </span>
+        </td>
+
+        <td class="px-5 py-2">
+          <%= link_to item_path(item.id) do %>
+          <button class="mt-2 border border-blue-400 p-1 rounded-lg text-blue-400 hover:bg-blue-400 hover:text-white">詳細</button>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= javascript_pack_tag "modules/application" %>

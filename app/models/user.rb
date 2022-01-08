@@ -9,4 +9,9 @@ class User < ApplicationRecord
 
   # carrierwave
   mount_uploader :user_image, UserImageUploader
+
+  # realtion
+  has_many :likes, dependent: :destroy
+  has_many :items, through: :likesh
+  has_many :reviews
 end

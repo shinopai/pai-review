@@ -1,0 +1,9 @@
+<% if @review.errors.any? %>
+<div id="error_explanation">
+  <ul class="text-red-500">
+    <% @review.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

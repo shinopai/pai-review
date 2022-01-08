@@ -7,7 +7,7 @@ $(window).scroll(function () {
     $('.header-nav').removeClass('block').addClass('hidden');
   }
 
-  $('.auth-menu-trigger').on('click', function () {
-    $('.auth-menu').toggleClass('hidden');
+  $('#auth-menu-trigger').on('click', function () {
+    $('#auth-menu').toggleClass('hidden');
   })
 })

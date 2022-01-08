@@ -1,0 +1,79 @@
+<div class="w-5/6 text-center mx-auto">
+  <%= link_to '一覧へ戻る', items_path, class: 'border border-blue-400 p-1 rounded-lg text-blue-400 hover:bg-blue-400 hover:text-white inline-block mt-3 float-right' %>
+
+  <%= link_to image_tag(show_url(@item.image_path), class: 'mx-auto', alt: @item.title, width: 210, height: 266), @item.url, class: 'block w-1/3 mx-auto mt-16 clear-both', target: 'blank' %>
+
+  <div class="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-10 mx-auto text-left">
+    <div class="py-4 px-6">
+      <% if @user %>
+      <% if @is_liked %>
+      <%= link_to unlike_user_item_likes_path(@user, @item), method: :delete do %>
+      <i class="fas fa-heart float-right text-xl cursor-pointer text-red-500" title="お気に入りを解除する"></i>
+      <% end %>
+      <% else %>
+      <%= link_to user_item_likes_path(@user, @item), method: :post do %>
+      <i class="far fa-heart float-right text-xl cursor-pointer" title="お気に入りに登録する"></i>
+      <% end %>
+      <% end %>
+      <% end %>
+
+      <h1 class="text-2xl font-semibold text-gray-800"><%= @item.title %></h1>
+      <div id="review-area">
+        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+      </div>
+      <p class="py-2 mt-5 text-lg text-gray-700"><%= @item.description %></p>
+      <hr>
+      <div class="mt-4 text-gray-700">
+        <h1 class="px-2 text-xl font-bold">レビュー(<%= @item.reviews.size %>)</h1>
+
+        <!-- reviews list -->
+        <div class="w-full max-w-screen-xl mx-auto px-6 overflow-scroll">
+          <div class="flex justify-center p-4 px-3 py-10">
+            <div class="w-full max-w-md">
+              <div class="bg-white shadow-md rounded-lg px-3 py-2 mb-4">
+                <div class="py-3 text-sm">
+                  <% @item.reviews.each do |review| %>
+                  <div class="flex justify-start text-gray-700 rounded-md px-2 py-2 my-2">
+                    <div class="flex-grow font-medium px-2"><%= review.body %></div>
+                    <div class="text-sm font-normal text-gray-500 tracking-wide"><%= review.user.name %>(スコア:&nbsp;<%= review.score %>)
+                      <% if @is_reviewed_item %>
+                      <%= link_to delete_review_user_item_reviews_path(@user, @item), method: :delete, title: 'レビューを削除する', data: { confirm: '本当に削除してよろしいですか？' } do %>
+                      <i class="fas fa-trash-alt text-red-500"></i>
+                      <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /reviews list -->
+
+        <% if user_signed_in? %>
+        <% if !@is_reviewed_item %>
+        <p class="mt-3"><button class="border border-blue-400 p-1 rounded-lg text-blue-400 hover:bg-blue-400 hover:text-white inline-block" id="review-form-trigger">レビューを書く</button></p>
+        <% end %>
+        <div id="review-form" class="mt-5 hidden">
+          <%= form_with model: @review, url: user_item_reviews_path(@user, @item), local: true do |new_review| %>
+          <%= render "/shared/reviews/error_messages", review: @review %>
+          <%= new_review.label :score, 'スコア(5段階)' %><br>
+          <%= new_review.select :score, {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5}, { include_blank: '選択してください'}, { class: 'border p-1' } %>
+          <div class="mt-5">
+            <%= new_review.text_area :body, class: 'border-2 resize-none p-2', rows: 5, cols: 30, placeholder: '100文字以内で記入してください' %>
+          </div>
+          <div class="mt-3">
+            <%= new_review.submit '投稿', class: 'inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition cursor-pointer' %>
+          </div>
+          <% end %>
+        </div>
+        <% else %>
+        <p class="mt-3">レビューをするには<%= link_to 'ログイン', new_user_session_path, class: 'text-blue-500 hover:underline' %>してください</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'modules/application' %>

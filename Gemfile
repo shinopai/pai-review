@@ -60,3 +60,12 @@ gem 'devise'
 
 # upload image
 gem 'carrierwave'
+
+# pagination
+gem 'kaminari'
+
+# search and sort
+gem 'ransack'
+
+# dammy data
+gem 'faker'
