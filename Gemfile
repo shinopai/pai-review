@@ -69,3 +69,6 @@ gem 'ransack'
 
 # dammy data
 gem 'faker'
+
+# s3
+gem 'fog-aws'
