@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
-  database: pai_review_production
-  username: pai_review
-  password: <%= ENV['PAI_REVIEW_DATABASE_PASSWORD'] %>
+  database: <%= ENV['PAI_REVIEW_DATABASE'] %>
+  host: <%= ENV['PAI_REVIEW_HOST'] %>
+  username: <%= ENV['PAI_REVIEW_USERNAME'] %>
+  password: <%= ENV['PAI_REVIEW_PASSWORD'] %>

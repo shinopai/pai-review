@@ -51,4 +51,6 @@ Rails.application.routes.draw do
       end
     end
   end
+    # show current user's reviews
+    get '/users/:id/reviews', to: 'reviews#show', as: :user_reviews
 end

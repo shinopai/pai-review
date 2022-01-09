@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_user
-  before_action :find_item
+  before_action :find_user, except: %i(show)
+  before_action :find_item, except: %i(show)
 
   def create
     @review = Review.new
@@ -27,6 +27,12 @@ class ReviewsController < ApplicationController
     @review.destroy
 
     redirect_to request.referer, notice: @item.title + 'に対するレビューを削除しました'
+  end
+
+  def show
+    @user = User.find(params[:id])
+
+    @reviews = Review.where(user_id: @user)
   end
 
   private
