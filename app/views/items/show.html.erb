@@ -19,7 +19,11 @@
 
       <h1 class="text-2xl font-semibold text-gray-800"><%= @item.title %></h1>
       <div id="review-area">
-        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+        <% if @score_avg.nan? %>
+        <p>まだレビューはありません</p>
+        <% else %>
+        <%= show_score_avg(@score_avg) %>(<%= @score_avg %>)
+        <% end %>
       </div>
       <p class="py-2 mt-5 text-lg text-gray-700"><%= @item.description %></p>
       <hr>
