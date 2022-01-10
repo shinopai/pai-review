@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @review = Review.new
+
     @review_scores = Review.where(item_id: @item).pluck(:score)
 
     if @review_scores.size == 1
