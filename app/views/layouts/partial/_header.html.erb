@@ -9,9 +9,7 @@
       <a class="mr-5 hover:text-gray-900">Amazonで検索する</a>
       <% if user_signed_in? %>
       <%= button_tag type: 'button', class: 'mr-5 hover:text-gray-900', id: 'auth-menu-trigger' do %>
-      <span class="material-icons">
-        person
-      </span>&nbsp;<%= current_user.name %>
+      <i class="fas fa-user"></i>&nbsp;<%= current_user.name %>
       <% end %>
       <% else %>
       <%= link_to 'ログイン', new_user_session_path, class: 'mr-5 hover:text-gray-900' %>

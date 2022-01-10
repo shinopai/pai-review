@@ -19,10 +19,10 @@ import '../css/tailwind.css'
 require('jquery')
 
 // top page slide show
-require('../slick')
+require('../bxslider')
 
-// // fontawesome
-// import '@fortawesome/fontawesome-free/js/all';
+// fontawesome
+import '@fortawesome/fontawesome-free/js/all';
 
 // header
 require('../modules/header')
