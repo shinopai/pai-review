@@ -36,7 +36,7 @@
                   <div class="flex justify-start text-gray-700 rounded-md px-2 py-2 my-2">
                     <div class="flex-grow font-medium px-2"><%= review.body %></div>
                     <div class="text-sm font-normal text-gray-500 tracking-wide"><%= review.user.name %>(スコア:&nbsp;<%= review.score %>)
-                      <% if @is_reviewed_item %>
+                      <% if @is_reviewed_item.any? && @is_reviewed_item[0].user.id == review.user.id %>
                       <%= link_to delete_review_user_item_reviews_path(@user, @item), method: :delete, title: 'レビューを削除する', data: { confirm: '本当に削除してよろしいですか？' } do %>
                       <i class="fas fa-trash-alt text-red-500"></i>
                       <% end %>

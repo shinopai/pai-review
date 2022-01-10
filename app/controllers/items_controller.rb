@@ -13,7 +13,10 @@ class ItemsController < ApplicationController
     if user_signed_in?
       @user = current_user
       @is_liked = Like.where(user_id: @user).where(item_id: @item).any?
-      @is_reviewed_item = Review.where(user_id: @user).where(item_id: @item).any?
+      @is_reviewed_item = Review.where(user_id: @user).where(item_id: @item)
+      logger.debug('start')
+      logger.debug(@is_reviewed_item[0].user.id)
+      logger.debug('end')
     end
   end
 

@@ -12,6 +12,6 @@ class User < ApplicationRecord
 
   # realtion
   has_many :likes, dependent: :destroy
-  has_many :items, through: :likesh
+  has_many :items, through: :likes
   has_many :reviews
 end
