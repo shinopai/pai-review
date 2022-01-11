@@ -10,15 +10,13 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @review = Review.new
 
-    logger.debug('ここから')
-    logger.debug(Review.where(item_id: @item).any?)
-    logger.debug('ここまで')
+    @review_scores = Review.where(item_id: @item).pluck(:score)
 
-    @review_scores = Review.where(item_id: @item).pluck(:score) if Review.where(item_id: @item)
-
-    if @review_scores.size == 1
+    if @review_scores.size == 0
+      @score_avg = 'No review'
+    elsif @review_scores.size == 1
       @score_avg = @review_scores.sum.fdiv(@review_scores.length).to_i
-    else
+    elsif @review_scores.size > 1
       @score_avg = @review_scores.sum.fdiv(@review_scores.length)
     end
 
@@ -28,6 +26,7 @@ class ItemsController < ApplicationController
       @is_reviewed_item = Review.where(user_id: @user).where(item_id: @item)
       logger.debug('start')
       logger.debug(@score_avg)
+      logger.debug(@score_avg.class)
       logger.debug('end')
     end
   end
