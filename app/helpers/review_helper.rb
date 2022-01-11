@@ -4,7 +4,7 @@ module ReviewHelper
   end
 
   def show_score_avg(n)
-    if n.kind_of?(Integer)
+    if n =~ /\A[1-9][0-9]*\z/
       content_tag(:i, nil, class: "fas fa-star text-yellow-300") * n +
       content_tag(:i, nil, class: "far fa-star text-yellow-300") * (5 - n) if 5 - n != 0
     else

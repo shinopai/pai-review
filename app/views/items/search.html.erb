@@ -1,8 +1,8 @@
 <div class="w-5/6 mx-auto">
-  <div class="text-center my-5">
-    <i class="fas fa-search-plus text-3xl search-form-trigger cursor-pointer hover:bg-gray-200 rounded-full p-2"></i>
+  <div class="text-center my-5" id="search-form-trigger">
+    <i class="fas fa-search-plus text-3xl cursor-pointer hover:bg-gray-200 rounded-full p-2"></i>
   </div>
-  <div class="container flex justify-center items-center search-form hidden">
+  <div class="container flex justify-center items-center hidden" id="search-form">
     <div class="relative">
       <%= search_form_for @q, url: search_items_path do |search| %>
       <div class="absolute top-4 left-3"> <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div>

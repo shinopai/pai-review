@@ -1,8 +1,8 @@
 <div class="w-5/6 mx-auto">
-  <div class="text-center my-5">
-    <i class="fas fa-search-plus text-3xl search-form-trigger cursor-pointer hover:bg-gray-200 rounded-full p-2"></i>
+  <div class="text-center my-5" id="search-form-trigger">
+    <i class="fas fa-search-plus text-3xl cursor-pointer hover:bg-gray-200 rounded-full p-2"></i>
   </div>
-  <div class="container flex justify-center items-center search-form hidden my-5">
+  <div class="container flex justify-center items-center hidden my-5" id="search-form">
     <div class="relative">
       <%= search_form_for @q, url: search_items_path do |search| %>
       <div class="absolute top-4 left-3"> <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div>
@@ -24,7 +24,7 @@
       <% @items.each do |item| %>
       <tr class="bg-white border-2 border-gray-200">
         <td class="px-3 py-2 flex flex-row items-center">
-          <%= link_to image_tag(show_url(item.image_path), class: 'h-30 w-20 object-cover', alt: item.title), item.url %>
+          <%= link_to image_tag(show_url(item.image_path), class: 'h-30 w-20 object-cover', alt: item.title), item.url, target: 'blank' %>
         </td>
         <td>
           <span class="text-center ml-2 font-semibold"><%= item.title %></span>

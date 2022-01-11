@@ -10,7 +10,11 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @review = Review.new
 
-    @review_scores = Review.where(item_id: @item).pluck(:score)
+    logger.debug('ここから')
+    logger.debug(Review.where(item_id: @item).any?)
+    logger.debug('ここまで')
+
+    @review_scores = Review.where(item_id: @item).pluck(:score) if Review.where(item_id: @item)
 
     if @review_scores.size == 1
       @score_avg = @review_scores.sum.fdiv(@review_scores.length).to_i
